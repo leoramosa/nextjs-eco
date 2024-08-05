@@ -1,11 +1,18 @@
 /* "use client"; */
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+/* import { Inter } from "next/font/google"; */
+import { Roboto } from "next/font/google";
 import { Header } from "app/components/shared/Header";
 import { Footer } from "app/components/shared/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+/* const inter = Inter({ subsets: ["latin"] }); */
+const roboto = Roboto({
+  weight: ["400", "500", "700"],
+  /* idiomas o carateres */
+  subsets: ["latin"],
+});
+import "app/sass/globals.sass";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +26,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      {/* <body className={inter.className}> */}
+      <body className={roboto.className}>
         <Header />
         {children}
         <Footer />
