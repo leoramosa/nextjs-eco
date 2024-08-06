@@ -33,3 +33,21 @@ export const getProducts = async (id?: string): Promise<ProductType[]> => {
     return [];
   }
 };
+
+export const getMainProducts = async () => {
+  const response = await fetch(shopifyUrls.products.mainProducts, {
+    headers: new Headers({
+      "X-Shopify-Access-Token": env.SHOPIFY_TOKEN,
+    }),
+    // force-cache para que no se cargue de nuevo
+    // cache: "force-cache",
+    // forzar la cache
+    // next: { revalidate: 10 },
+    //para recargar la peticion de cache
+    cache: "no-cache",
+  });
+
+  const { products } = await response.json();
+
+  return products;
+};
