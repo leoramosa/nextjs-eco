@@ -1,4 +1,4 @@
-import { env } from "../../config/env";
+import { env } from "app/config/env";
 
 export const shopifyUrls = {
   products: {

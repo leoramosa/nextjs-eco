@@ -4,7 +4,7 @@
 //   return Response.json({ message });
 // }
 
-import { getProducts } from "app/services/shopify";
+import { getProducts } from "app/services/shopify/products";
 
 export async function GET() {
   const products = await getProducts();
