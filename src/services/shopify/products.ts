@@ -44,7 +44,11 @@ export const getMainProducts = async () => {
     // forzar la cache
     // next: { revalidate: 10 },
     //para recargar la peticion de cache
-    cache: "no-cache",
+    //cache: "no-cache",
+    cache: "force-cache",
+    next: {
+      tags: ["main-products"],
+    },
   });
 
   const { products } = await response.json();
