@@ -1,5 +1,6 @@
 import { ProductView } from "app/components/product/ProductView/ProductView";
 import { getProducts } from "app/services/shopify/products";
+import { title } from "process";
 // import { redirect } from "next/navigation";
 //usaresmos otro metodo con los hooks
 
@@ -8,6 +9,21 @@ import { getProducts } from "app/services/shopify/products";
 interface ProductPageProps {
   searchParams: {
     id: string;
+  };
+}
+
+export async function generateMetadata({ searchParams }: ProductPageProps) {
+  const id = searchParams.id;
+  const products = await getProducts(id);
+  const product = products[0];
+
+  return {
+    title: product.title,
+    description: product.description,
+    keywords: product.tags,
+    openGraph: {
+      images: [product.image],
+    },
   };
 }
 
