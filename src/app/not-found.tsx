@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "app/sass/not-found.module.sass";
 
-export default function NotFound() {
+export function NotFound() {
   return (
     <main className={styles.NotFound}>
       <h1 className={styles.NotFound__title}>404</h1>
@@ -19,3 +19,5 @@ export default function NotFound() {
     </main>
   );
 }
+
+export default NotFound;
