@@ -26,21 +26,25 @@ export const useShoppingCart = create<Store>()((set) => ({
   addToCart: (cartItem: CartItem) =>
     set((state) => {
       const currentCart = state.cart;
-      const itemExists = currentCart.find((item) => item.id === cartItem.id);
-      const replaceExistingItem = currentCart.map((item) => {
-        if (item.id === cartItem.id) {
-          return cartItem;
-        }
-        return item;
-      });
+      const itemIndex = currentCart.findIndex(
+        (item) => item.id === cartItem.id
+      ); // Encuentra el índice del producto en el carrito actual
 
-      if (itemExists) {
-        saveArrayToLocalStorage(replaceExistingItem);
-        return { cart: replaceExistingItem };
+      if (itemIndex !== -1) {
+        // Si el producto ya existe en el carrito, actualiza la cantidad
+        const updatedCart = [...currentCart];
+        updatedCart[itemIndex] = {
+          ...updatedCart[itemIndex],
+          quantity: updatedCart[itemIndex].quantity + cartItem.quantity, // Suma la nueva cantidad a la existente
+        };
+        saveArrayToLocalStorage(updatedCart);
+        return { cart: updatedCart };
       }
 
-      saveArrayToLocalStorage([...state.cart, cartItem]);
-      return { cart: [...state.cart, cartItem] };
+      // Si el producto no está en el carrito, agrégalo
+      const newCart = [...currentCart, cartItem];
+      saveArrayToLocalStorage(newCart);
+      return { cart: newCart };
     }),
   removeCartItem: (cartItem: CartItem) =>
     set((state) => {

@@ -26,6 +26,7 @@ export const ProductViewItemsOrder = ({
       image: product.image,
       merchandiseId: product.gql_id,
     });
+    setCounter(1);
   };
 
   const handleSubtract = (event: SyntheticEvent) => {
